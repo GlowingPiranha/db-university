@@ -1,0 +1,37 @@
+SELECT `students`.*
+FROM `students`
+JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id`
+WHERE `degrees`.`name` = "Corso di Laurea in Economia"
+
+22:58:25	SELECT `students`.* FROM `students` JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id` WHERE `degrees`.`name` = "Corso di Laurea in Economia" LIMIT 0, 1000	68 row(s) returned	0.015 sec / 0.000 sec
+
+
+SELECT * FROM `db-university`. `degrees`
+JOIN `departments` ON `departments`.`id` = `degrees`.`department_id`
+WHERE `degrees`.`level` = "magistrale"
+AND `departments`.`name` = "Dipartimento di Neuroscienze"
+
+23:00:51	SELECT * FROM `db-university`. `degrees` JOIN `departments` ON `departments`.`id` = `degrees`.`department_id` WHERE `degrees`.`level` = "magistrale" AND `departments`.`name` = "Dipartimento di Neuroscienze" LIMIT 0, 1000	1 row(s) returned	0.031 sec / 0.000 sec
+
+
+SELECT * FROM `courses`
+JOIN `course_teacher` ON `course_teacher`.`course_id`= `courses`.`id`
+JOIN `teachers` ON `teachers`.`id` = `course_teacher`.`teacher_id`
+WHERE `teachers`.`name`= "Fulvio"
+AND `teachers`.`surname`= "Amato"
+
+23:01:47	SELECT * FROM `courses` JOIN `course_teacher` ON `course_teacher`.`course_id`= `courses`.`id` JOIN `teachers` ON `teachers`.`id` = `course_teacher`.`teacher_id` WHERE `teachers`.`name`= "Fulvio" AND `teachers`.`surname`= "Amato" LIMIT 0, 1000	11 row(s) returned	0.031 sec / 0.000 sec
+
+
+SELECT `students`.`name`, `students`.`surname`,`degrees`.`name`AS `degree`, `departments`.`name` AS `department`
+FROM `students`
+JOIN `exam_student` ON `exam_student`.`student_id`= `students`.`id`
+JOIN `exams` ON  `exams`.`id` = `exam_student`.`exam_id`
+JOIN `courses` ON `courses`.`id`= `exams`.`course_id`
+JOIN `degrees` ON `degrees`.`id` = `courses`.`degree_id`
+JOIN `departments` ON `departments`.`id`= `degrees`.`department_id`
+ORDER BY `students`.`surname`,`students`.`name`  ASC;
+
+23:03:07	SELECT `students`.`name`, `students`.`surname`,`degrees`.`name`AS `degree`, `departments`.`name` AS `department` FROM `students` JOIN `exam_student` ON `exam_student`.`student_id`= `students`.`id` JOIN `exams` ON  `exams`.`id` = `exam_student`.`exam_id` JOIN `courses` ON `courses`.`id`= `exams`.`course_id` JOIN `degrees` ON `degrees`.`id` = `courses`.`degree_id` JOIN `departments` ON `departments`.`id`= `degrees`.`department_id` ORDER BY `students`.`surname`,`students`.`name`  ASC LIMIT 0, 1000	1000 row(s) returned	0.218 sec / 0.000 sec
+
+
